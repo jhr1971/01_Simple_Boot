@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
-                git url: 'https://github.com/mm167/01_simple_boot.git'
+                git url: 'https://github.com/jhr1971/01_simple_boot.git'
             }
         }
         
@@ -73,14 +73,14 @@ pipeline {
 		stage('Docker build') {
 		     steps {
 		     	echo "-=- Building Docker Image -=-"
-		        sh 'docker build -t doum167/simple-boot .'
+		        sh 'docker build -t jhr1971/simple-boot .'
 		     }
 		}
 		
 		stage('Deploy the Application') {
 		     steps {
 		     	echo "-=- Deploying Docker Image -=-"
-		        sh 'docker run -d --name=simple-boot -p 8180:8080 doum167/simple-boot'
+		        sh 'docker run -d --name=simple-boot -p 8180:8081 jhr1971/simple-boot'
 		     }
 		}
     }
