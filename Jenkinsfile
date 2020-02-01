@@ -53,6 +53,8 @@ pipeline {
 		stage('Deploy the Application') {
 		     steps {
 		     	echo "-=- Deploying Docker Image -=-"
+		     	sh 'docker stop simple-boot'
+		     	sh 'docker rm simple-boot'
 		        sh 'docker run -d --name=simple-boot -p 8180:8081 jhr1971/simple-boot'
 		     }
 		}
