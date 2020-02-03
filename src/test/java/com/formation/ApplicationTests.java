@@ -1,6 +1,7 @@
 package com.formation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.formation.service.Calculator;
@@ -21,8 +22,22 @@ class ApplicationTests {
     }
     
     @Test
-    public void testNameMkyong() {
+    public void testMessageName() {
         MessageBuilder obj = new MessageBuilder();
         assertEquals("Hello Jean", obj.getMessage("Jean"));
     }
+    
+    @Test
+    public void testMessageProvideName() {
+        MessageBuilder obj = new MessageBuilder();
+        assertEquals("Please provide a name!", obj.getMessage("   "));
+        assertTrue(obj.getMessage("   ").toUpperCase().contains("PLEASE PROVIDE"));
+    }
+    
+    @Test
+    public void testMessageProvideNameNull() {
+        MessageBuilder obj = new MessageBuilder();
+        assertEquals("Please provide a name!", obj.getMessage(null));
+    }
+    
 }
