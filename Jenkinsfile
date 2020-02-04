@@ -47,11 +47,23 @@ pipeline {
             }
         }
         
+        stage('Sanity check') {
+		    steps {
+		        echo "-=- Sanity Check Test project (CheckStyle et PMD-=-"
+		        sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd'
+		    }
+		    post {
+		        always {
+		            recordIssues enabledForFailure: true, tools: [checkStyle()]
+		            recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
+		        }
+		    }
+		}
 		
 		
 		stage('Package') {
 		     steps {
-		     	echo "-=- Packaging application -=-"
+		     	echo "-=- Packaging application (Skipping tests)-=-"
 		        sh 'mvn package -Dmaven.test.skip=true'
 		     }
 		}
