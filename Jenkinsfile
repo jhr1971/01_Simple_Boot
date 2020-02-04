@@ -37,6 +37,7 @@ pipeline {
         
          stage('Code coverage') {
             steps {
+                  echo "-=- Code Coverage -=-"
                 jacoco( 
                       execPattern: 'target/*.exec',
                       classPattern: 'target/classes',
